@@ -19,7 +19,7 @@
             align-items: center; 
         }
         
-        /* Kontainer dilebarkan (1300px), ditambah gap untuk ruang kosong di tengah */
+        /* Kontainer*/
         .main-wrapper { 
             display: flex; 
             width: 100%; 
@@ -30,7 +30,7 @@
             padding: 0 40px; 
         }
 
-        /* Panel Kiri ditarik merapat ke kiri */
+        /* Panel Kiri*/
         .left-panel {
             background-color: #386641;
             color: white;
@@ -70,7 +70,7 @@
             font-size: 1.05rem; 
         }
 
-        /* Panel Kanan didorong ke kanan (flex-end) agar tidak menumpuk di tengah */
+        /* Panel Kanan*/
         .right-panel { 
             flex: 1; 
             display: flex; 
