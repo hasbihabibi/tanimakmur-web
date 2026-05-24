@@ -1,7 +1,6 @@
 <?php
 require_once 'config/database.php';
 
-// Logika Pemrosesan saat tombol Simpan ditekan
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tgl       = $conn->real_escape_string($_POST['tanggal_panen']);
     $kuantitas = $conn->real_escape_string($_POST['kuantitas_kg']);
@@ -21,87 +20,89 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <title>Tambah Batch - TaniMakmur</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .card { background: white; width: 100%; max-width: 600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .card-header { background-color: #3a6b41; color: white; padding: 15px 20px; font-weight: bold; font-size: 18px; }
+        .card-body { padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-row { display: flex; gap: 15px; }
+        .form-col { flex: 1; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; color: #333; }
+        input[type="date"], input[type="number"], select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
+        .btn-group { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+        .btn { padding: 10px 15px; text-decoration: none; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; }
+        .btn-green { background-color: #3a6b41; color: white; }
+        .btn-grey { background-color: #f1f1f1; color: #333; border: 1px solid #ccc; }
+        .alert { background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 4px; margin-bottom: 15px; }
+    </style>
 </head>
-<body class="bg-light">
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-success text-white">
-                    <h5 class="mb-0">Input Batch Panen Baru</h5>
+<body>
+<div class="card">
+    <div class="card-header">Input Batch Panen Baru</div>
+    <div class="card-body">
+        <?php if(isset($error_msg)) echo "<div class='alert'>$error_msg</div>"; ?>
+        
+        <form method="POST" action="">
+            <div class="form-row">
+                <div class="form-group form-col">
+                    <label>Tanggal Panen</label>
+                    <input type="date" name="tanggal_panen" required>
                 </div>
-                <div class="card-body">
-                    <?php if(isset($error_msg)) echo "<div class='alert alert-danger'>$error_msg</div>"; ?>
-                    
-                    <form method="POST" action="">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Tanggal Panen</label>
-                                <input type="date" name="tanggal_panen" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Kuantitas (kg)</label>
-                                <input type="number" step="0.01" name="kuantitas_kg" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Petani Penggarap</label>
-                                <select name="id_petani" class="form-select" required>
-                                    <option value="">-- Pilih Petani --</option>
-                                    <?php
-                                    $res_petani = $conn->query("SELECT id_petani, nama_petani FROM petani");
-                                    while($p = $res_petani->fetch_assoc()) {
-                                        echo "<option value='".$p['id_petani']."'>".$p['nama_petani']."</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Komoditas</label>
-                                <select name="id_komoditas" class="form-select" required>
-                                    <option value="">-- Pilih Komoditas --</option>
-                                    <?php
-                                    $res_komo = $conn->query("SELECT id_komoditas, nama_komoditas FROM komoditas");
-                                    while($k = $res_komo->fetch_assoc()) {
-                                        echo "<option value='".$k['id_komoditas']."'>".$k['nama_komoditas']."</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-md-6">
-                                <label class="form-label">Grade Panen</label>
-                                <select name="grade_panen" class="form-select" required>
-                                    <option value="Grade A">Grade A</option>
-                                    <option value="Grade B">Grade B</option>
-                                    <option value="Grade C">Grade C</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Harga per Kg (Saat Ini)</label>
-                                <input type="number" step="0.01" name="harga_per_kg" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="index.php" class="btn btn-outline-secondary">Batal</a>
-                            <button type="submit" class="btn btn-success">Simpan Batch</button>
-                        </div>
-                    </form>
+                <div class="form-group form-col">
+                    <label>Kuantitas (kg)</label>
+                    <input type="number" step="0.01" name="kuantitas_kg" required>
                 </div>
             </div>
-        </div>
+
+            <div class="form-row">
+                <div class="form-group form-col">
+                    <label>Petani Penggarap</label>
+                    <select name="id_petani" required>
+                        <option value="">-- Pilih Petani --</option>
+                        <?php
+                        $res_petani = $conn->query("SELECT id_petani, nama_petani FROM petani");
+                        while($p = $res_petani->fetch_assoc()) echo "<option value='".$p['id_petani']."'>".$p['nama_petani']."</option>";
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group form-col">
+                    <label>Komoditas</label>
+                    <select name="id_komoditas" required>
+                        <option value="">-- Pilih Komoditas --</option>
+                        <?php
+                        $res_komo = $conn->query("SELECT id_komoditas, nama_komoditas FROM komoditas");
+                        while($k = $res_komo->fetch_assoc()) echo "<option value='".$k['id_komoditas']."'>".$k['nama_komoditas']."</option>";
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group form-col">
+                    <label>Grade Panen</label>
+                    <select name="grade_panen" required>
+                        <option value="Grade A">Grade A</option>
+                        <option value="Grade B">Grade B</option>
+                        <option value="Grade C">Grade C</option>
+                    </select>
+                </div>
+                <div class="form-group form-col">
+                    <label>Harga per Kg</label>
+                    <input type="number" step="0.01" name="harga_per_kg" required>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <a href="index.php" class="btn btn-grey">Batal</a>
+                <button type="submit" class="btn btn-green">Simpan Batch</button>
+            </div>
+        </form>
     </div>
 </div>
 </body>
