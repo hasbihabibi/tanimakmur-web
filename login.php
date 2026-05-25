@@ -156,7 +156,7 @@
         <div class="right-panel">
             <div class="login-form">
                 <h2>Login ke Akun<br>Anda</h2>
-                <form action="index.php" method="POST">
+                <form action="proses_login.php" method="POST">
                     <div class="form-group">
                         <label>Email Address</label>
                         <input type="email" name="email" required>
