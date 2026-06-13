@@ -49,10 +49,10 @@ const barCtx = document.getElementById('barChart');
 new Chart(barCtx, {
     type: 'bar',
     data: {
-        labels: ['Grade A', 'Grade B', 'Grade C'],
+        labels: gradeLabel,
         datasets: [{
             label: 'Volume Panen',
-            data: [320, 220, 110],
+            data: gradeData,
             backgroundColor: ['#2f8f3d', '#ea4335', '#fbbc05']
         }]
     },

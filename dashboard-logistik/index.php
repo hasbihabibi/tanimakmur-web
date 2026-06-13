@@ -1,37 +1,103 @@
 <?php
+require_once '../config/database.php';
+$sql = "
+SELECT SUM(kuantitas_kg) AS total
+FROM batch_panen
+";
+
+$result = $conn->query($sql);
+$data = $result->fetch_assoc();
+
+$totalPanen = $data['total'] ?? 0;
+
+$sql = "
+SELECT COUNT(*) AS total
+FROM petani
+";
+
+$result = $conn->query($sql);
+$data = $result->fetch_assoc();
+
+$totalPetani = $data['total'];
+
+$sql = "
+SELECT COUNT(*) AS total
+FROM komoditas
+";
+
+$result = $conn->query($sql);
+$data = $result->fetch_assoc();
+
+$totalKomoditas = $data['total'];
+
+$sql = "
+SELECT COUNT(*) AS total
+FROM batch_panen
+";
+
+$result = $conn->query($sql);
+$data = $result->fetch_assoc();
+
+$totalBatch = $data['total'];
+
 $cards = [
     [
         'title' => 'Total Panen',
-        'value' => '7.050 kg',
+        'value' => number_format($totalPanen,0,',','.').' kg',
         'desc' => 'Total hasil panen',
         'color' => 'green'
     ],
     [
-        'title' => 'Distribusi',
-        'value' => '4.830 kg',
-        'desc' => 'Distribusi terkirim',
+        'title' => 'Total Batch',
+        'value' => $totalBatch,
+        'desc' => 'Batch panen tercatat',
         'color' => 'red'
     ],
     [
         'title' => 'Komoditas',
-        'value' => '3',
-        'desc' => 'Cabai Merah, Rawit, Keriting',
+        'value' => $totalKomoditas,
+        'desc' => 'Jenis komoditas',
         'color' => 'yellow'
     ],
     [
-        'title' => 'Anggota Tani',
-        'value' => '18',
-        'desc' => 'Petani aktif',
+        'title' => 'Petani',
+        'value' => $totalPetani,
+        'desc' => 'Petani terdaftar',
         'color' => 'green'
     ]
 ];
 
-$batches = [
-    ['kode' => 'BP-001', 'grade' => 'Grade A', 'berat' => '200 Kg', 'status' => 'Siap Distribusi'],
-    ['kode' => 'BP-002', 'grade' => 'Grade B', 'berat' => '120 Kg', 'status' => 'Proses'],
-    ['kode' => 'BP-003', 'grade' => 'Grade C', 'berat' => '95 Kg', 'status' => 'Sorting'],
-    ['kode' => 'BP-004', 'grade' => 'Grade A', 'berat' => '250 Kg', 'status' => 'Terkirim'],
-];
+$sqlBatch = "
+SELECT
+b.id_batch,
+b.grade_panen,
+b.kuantitas_kg
+FROM batch_panen b
+ORDER BY b.tanggal_panen DESC
+LIMIT 5
+";
+
+$resultBatch = $conn->query($sqlBatch);
+
+$sqlGrade = "
+SELECT
+grade_panen,
+SUM(kuantitas_kg) AS total
+FROM batch_panen
+GROUP BY grade_panen
+";
+
+$resultGrade = $conn->query($sqlGrade);
+
+$gradeLabel = [];
+$gradeData = [];
+
+while($row = $resultGrade->fetch_assoc()){
+
+    $gradeLabel[] = $row['grade_panen'];
+    $gradeData[] = (float)$row['total'];
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -191,24 +257,24 @@ $batches = [
                         </tr>
                     </thead>
 
-                    <tbody>
+                   <tbody>
 
-                    <?php foreach($batches as $batch): ?>
+<?php while($batch = $resultBatch->fetch_assoc()): ?>
 
-                        <tr>
-                            <td><?= $batch['kode']; ?></td>
-                            <td><?= $batch['grade']; ?></td>
-                            <td><?= $batch['berat']; ?></td>
-                            <td>
-                                <span class="status">
-                                    <?= $batch['status']; ?>
-                                </span>
-                            </td>
-                        </tr>
+<tr>
+    <td>BP-<?= $batch['id_batch']; ?></td>
+    <td><?= $batch['grade_panen']; ?></td>
+    <td><?= $batch['kuantitas_kg']; ?> Kg</td>
+    <td>
+        <span class="status">
+            Tersimpan
+        </span>
+    </td>
+</tr>
 
-                    <?php endforeach; ?>
+<?php endwhile; ?>
 
-                    </tbody>
+</tbody>
                 </table>
             </div>
 
@@ -217,6 +283,16 @@ $batches = [
     </main>
 
 </div>
+
+<script>
+
+const gradeLabel =
+<?= json_encode($gradeLabel); ?>;
+
+const gradeData =
+<?= json_encode($gradeData); ?>;
+
+</script>
 
 <script src="script.js"></script>
 </body>
