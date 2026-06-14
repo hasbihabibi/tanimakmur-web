@@ -85,6 +85,47 @@ while($row = $resultGrade->fetch_assoc()) {
     $gradeLabel[] = $row['grade_panen'];
     $gradeData[] = (float)$row['total'];
 }
+
+$sqlLine = "
+SELECT
+DATE_FORMAT(tanggal_panen,'%d-%m') AS periode,
+SUM(kuantitas_kg) AS total
+FROM batch_panen
+GROUP BY tanggal_panen
+ORDER BY tanggal_panen
+";
+
+$resultLine = $conn->query($sqlLine);
+
+$lineLabel = [];
+$lineData = [];
+
+while($row = $resultLine->fetch_assoc()){
+
+    $lineLabel[] = $row['periode'];
+    $lineData[] = (float)$row['total'];
+
+}
+
+$sqlStatus = "
+SELECT
+status_kirim,
+COUNT(*) AS total
+FROM manifest_logistik
+GROUP BY status_kirim
+";
+
+$resultStatus = $conn->query($sqlStatus);
+
+$statusLabel = [];
+$statusData = [];
+
+while($row = $resultStatus->fetch_assoc()){
+
+    $statusLabel[] = $row['status_kirim'];
+    $statusData[] = (int)$row['total'];
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -280,6 +321,18 @@ const gradeLabel =
 
 const gradeData =
 <?= json_encode($gradeData); ?>;
+
+const lineLabel =
+<?= json_encode($lineLabel); ?>;
+
+const lineData =
+<?= json_encode($lineData); ?>;
+
+const statusLabel =
+<?= json_encode($statusLabel); ?>;
+
+const statusData =
+<?= json_encode($statusData); ?>;
 
 </script>
 
