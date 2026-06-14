@@ -51,9 +51,13 @@ new Chart(barCtx, {
     data: {
         labels: gradeLabel,
         datasets: [{
-            label: 'Volume Panen',
+            label: 'Volume Panen (Kg)',
             data: gradeData,
-            backgroundColor: ['#2f8f3d', '#ea4335', '#fbbc05']
+            backgroundColor: [
+                '#34a853',
+                '#fbbc05',
+                '#ea4335'
+            ]
         }]
     },
     options: {

@@ -1,49 +1,38 @@
 <?php
 require_once '../config/database.php';
-$sql = "
-SELECT SUM(kuantitas_kg) AS total
-FROM batch_panen
-";
 
-$result = $conn->query($sql);
+$result = $conn->query("
+    SELECT SUM(kuantitas_kg) AS total
+    FROM batch_panen
+");
 $data = $result->fetch_assoc();
-
 $totalPanen = $data['total'] ?? 0;
 
-$sql = "
-SELECT COUNT(*) AS total
-FROM petani
-";
-
-$result = $conn->query($sql);
+$result = $conn->query("
+    SELECT COUNT(*) AS total
+    FROM petani
+");
 $data = $result->fetch_assoc();
-
 $totalPetani = $data['total'];
 
-$sql = "
-SELECT COUNT(*) AS total
-FROM komoditas
-";
-
-$result = $conn->query($sql);
+$result = $conn->query("
+    SELECT COUNT(*) AS total
+    FROM komoditas
+");
 $data = $result->fetch_assoc();
-
 $totalKomoditas = $data['total'];
 
-$sql = "
-SELECT COUNT(*) AS total
-FROM batch_panen
-";
-
-$result = $conn->query($sql);
+$result = $conn->query("
+    SELECT COUNT(*) AS total
+    FROM batch_panen
+");
 $data = $result->fetch_assoc();
-
 $totalBatch = $data['total'];
 
 $cards = [
     [
         'title' => 'Total Panen',
-        'value' => number_format($totalPanen,0,',','.').' kg',
+        'value' => number_format($totalPanen,0,',','.').' Kg',
         'desc' => 'Total hasil panen',
         'color' => 'green'
     ],
@@ -69,11 +58,11 @@ $cards = [
 
 $sqlBatch = "
 SELECT
-b.id_batch,
-b.grade_panen,
-b.kuantitas_kg
-FROM batch_panen b
-ORDER BY b.tanggal_panen DESC
+    id_batch,
+    grade_panen,
+    kuantitas_kg
+FROM batch_panen
+ORDER BY tanggal_panen DESC
 LIMIT 5
 ";
 
@@ -81,8 +70,8 @@ $resultBatch = $conn->query($sqlBatch);
 
 $sqlGrade = "
 SELECT
-grade_panen,
-SUM(kuantitas_kg) AS total
+    grade_panen,
+    SUM(kuantitas_kg) AS total
 FROM batch_panen
 GROUP BY grade_panen
 ";
@@ -92,11 +81,9 @@ $resultGrade = $conn->query($sqlGrade);
 $gradeLabel = [];
 $gradeData = [];
 
-while($row = $resultGrade->fetch_assoc()){
-
+while($row = $resultGrade->fetch_assoc()) {
     $gradeLabel[] = $row['grade_panen'];
     $gradeData[] = (float)$row['total'];
-
 }
 ?>
 
@@ -167,26 +154,28 @@ while($row = $resultGrade->fetch_assoc()){
             </div>
 
             <div class="hero-right">
-                <div class="mini-card">
-                    <h4>Grade A</h4>
-                    <p>Rp 55.000/kg</p>
-                </div>
 
-                <div class="mini-card">
-                    <h4>Grade B</h4>
-                    <p>Rp 40.000/kg</p>
-                </div>
+    <div class="mini-card">
+        <h4>Total Panen</h4>
+        <p><?= number_format($totalPanen,0,',','.'); ?> Kg</p>
+    </div>
 
-                <div class="mini-card">
-                    <h4>Stok Siap Kirim</h4>
-                    <p>4.830 kg</p>
-                </div>
+    <div class="mini-card">
+        <h4>Total Batch</h4>
+        <p><?= $totalBatch; ?></p>
+    </div>
 
-                <div class="mini-card">
-                    <h4>Pengiriman Hari Ini</h4>
-                    <p>3 Batch</p>
-                </div>
-            </div>
+    <div class="mini-card">
+        <h4>Total Komoditas</h4>
+        <p><?= $totalKomoditas; ?></p>
+    </div>
+
+    <div class="mini-card">
+        <h4>Total Petani</h4>
+        <p><?= $totalPetani; ?></p>
+    </div>
+
+</div>
         </section>
 
         <section class="stats-grid">
@@ -264,7 +253,7 @@ while($row = $resultGrade->fetch_assoc()){
 <tr>
     <td>BP-<?= $batch['id_batch']; ?></td>
     <td><?= $batch['grade_panen']; ?></td>
-    <td><?= $batch['kuantitas_kg']; ?> Kg</td>
+    <td><?= number_format($batch['kuantitas_kg'],0,',','.'); ?> Kg</td>
     <td>
         <span class="status">
             Tersimpan
