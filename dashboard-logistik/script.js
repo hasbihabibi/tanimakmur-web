@@ -28,11 +28,11 @@ new Chart(doughnutCtx, {
         datasets: [{
             data: statusData,
             backgroundColor: [
-                '#2f8f3d',
-                '#fbbc05',
-                '#ea4335',
-                '#4285f4'
-            ]
+    '#fbbc05',
+    '#4285f4',
+    '#34a853',
+    '#ea4335'
+]
         }]
     },
     options: {
