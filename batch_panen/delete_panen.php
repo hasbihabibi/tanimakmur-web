@@ -1,6 +1,6 @@
 <?php
 // actions/delete_panen.php
-require_once '../config/database.php';
+require_once '../config/database.php'; // Pakai ../ karena posisi filenya sekarang di dalam folder actions
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];

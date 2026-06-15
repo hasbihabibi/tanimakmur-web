@@ -115,9 +115,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="btn-group">
                 <a href="index.php" class="btn btn-grey">Batal</a>
                 <button type="submit" class="btn btn-green">Simpan Batch</button>
-            </div>
-        </form>
-    </div>
-</div>
-</body>
-</html>
