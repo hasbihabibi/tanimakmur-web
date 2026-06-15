@@ -137,6 +137,7 @@ while($row = $resultStatus->fetch_assoc()){
 
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="chart.js"></script>
 </head>
 <body>
 
