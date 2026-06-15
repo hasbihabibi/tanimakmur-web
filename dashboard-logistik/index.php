@@ -183,7 +183,7 @@ while($row = $resultStatus->fetch_assoc()){
                 </h1>
 
                 <p>
-                    Pengelolaan distribusi komoditas cabai dari lahan hingga pasar secara efisien,
+                    Pengelolaan distribusi hasil panen multi-komoditas dari petani hingga pengepul secara efisien,
                     transparan, dan berbasis data real-time.
                 </p>
 
@@ -241,7 +241,7 @@ while($row = $resultStatus->fetch_assoc()){
 
             <div class="chart-box large">
                 <div class="box-header">
-                    <h3>Tren Panen & Distribusi</h3>
+                    <h3>Tren Panen</h3>
                 </div>
 
                 <canvas id="lineChart"></canvas>
