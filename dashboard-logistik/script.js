@@ -51,8 +51,8 @@ new Chart(barCtx, {
             data: gradeData,
             backgroundColor: [
                 '#34a853',
-                '#fbbc05',
-                '#ea4335'
+                '#ea4335',
+                '#fbbc05'
             ]
         }]
     },
@@ -62,6 +62,9 @@ new Chart(barCtx, {
         plugins: {
             legend: {
                 display: false
+            },
+            tooltip: {
+                enabled: true
             }
         }
     }
