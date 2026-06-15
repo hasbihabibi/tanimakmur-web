@@ -1,25 +1,36 @@
 <?php
 session_start();
-include 'koneksi.php';
+include 'config/database.php';
+
 $email = $_POST['email'];
 $password = $_POST['password'];
-$query = mysqli_query($conn,
-    "SELECT * FROM users WHERE email='$email'");
+
+$query = mysqli_query(
+    $conn,
+    "SELECT * FROM users WHERE email='$email'"
+);
+
 $data = mysqli_fetch_assoc($query);
-if ($data) {
-    if ($email == "admin@gmail.com" &&
-        $password == "admin123") {
+
+if($data){
+
+    if($password == $data['password']){
 
         $_SESSION['login'] = true;
         $_SESSION['nama'] = $data['nama'];
-        header("Location: dashboard.php");
+
+        header("Location: dashboard/index.php");
         exit;
-} else {
+
+    } else {
+
         echo "Password salah!";
 
     }
 
 } else {
+
     echo "Email tidak ditemukan!";
+
 }
 ?>

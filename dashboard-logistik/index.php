@@ -1,5 +1,11 @@
 <?php
 require_once '../config/database.php';
+session_start();
+
+if(!isset($_SESSION['login'])){
+    header("Location: ../login.php");
+    exit;
+}
 
 $result = $conn->query("
     SELECT SUM(kuantitas_kg) AS total
