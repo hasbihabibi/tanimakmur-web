@@ -19,7 +19,7 @@ if($data){
         $_SESSION['login'] = true;
         $_SESSION['nama'] = $data['nama'];
 
-        header("Location: dashboard/index.php");
+        header("Location: dashboard-logistik/index.php");
         exit;
 
     } else {
