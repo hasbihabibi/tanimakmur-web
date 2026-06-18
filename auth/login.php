@@ -146,7 +146,7 @@
     <div class="main-wrapper">
         <div class="left-panel">
             <div class="header-title">🌱 Tani Makmur</div>
-            <img src="assets/img/jagung.png" alt="Jagung" class="hero-img">
+            <img src="../assets/img/jagung.png" alt="Jagung" class="hero-img">
             <div class="welcome-text">
                 <h1>Selamat datang di<br>Tani Makmur!</h1>
                 <p>Sistem Informasi Logistik Pasca-Panen<br>Komoditas Pertanian Multi Grade</p>

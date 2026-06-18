@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config/database.php';
+require_once '../config/database.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -19,7 +19,7 @@ if($data){
         $_SESSION['login'] = true;
         $_SESSION['nama'] = $data['nama'];
 
-        header("Location: dashboard-logistik/index.php");
+        header("Location: ../dashboard/index.php");
         exit;
 
     } else {

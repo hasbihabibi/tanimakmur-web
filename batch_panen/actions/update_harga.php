@@ -1,6 +1,5 @@
 <?php
-// actions/update_harga.php
-require_once '../config/database.php'; // Pakai ../ karena posisi filenya sekarang di dalam folder actions
+require_once '../config/database.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = intval($_POST['id_batch']);

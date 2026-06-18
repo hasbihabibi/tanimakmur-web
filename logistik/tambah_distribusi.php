@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $plat_nomor    = $conn->real_escape_string($_POST['plat_nomor']);
     $tanggal_kirim = $conn->real_escape_string($_POST['tanggal_kirim']);
 
-    // Sekarang kita pakai UPDATE, bukan INSERT INTO distribusi
     $stmt = $conn->prepare("UPDATE batch_panen SET nama_driver = ?, plat_nomor = ?, tanggal_kirim = ?, status_distribusi = 'Dalam Perjalanan' WHERE id_batch = ?");
     $stmt->bind_param("sssi", $nama_driver, $plat_nomor, $tanggal_kirim, $id_batch);
 
@@ -46,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <select name="id_batch" required>
                 <option value="">-- Pilih Batch Panen --</option>
                 <?php
-                // Hanya mengambil batch panen yang statusnya masih 'Belum Dikirim'
                 $res_batch = $conn->query("SELECT b.id_batch, k.nama_komoditas, b.tanggal_panen, b.kuantitas_kg 
                                            FROM batch_panen b 
                                            JOIN komoditas k ON b.id_komoditas = k.id_komoditas
