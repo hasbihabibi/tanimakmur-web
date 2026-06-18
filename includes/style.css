@@ -407,3 +407,121 @@ table tr:hover{
     border-radius:10px;
     margin-bottom:20px;
 }
+
+.table-header{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:20px;
+}
+
+.btn{
+    text-decoration:none;
+    padding:10px 15px;
+    border-radius:8px;
+    color:white;
+    display:inline-block;
+    font-size:14px;
+}
+
+.btn-success{
+    background:#2f8f3d;
+}
+
+.btn-success:hover{
+    background:#256f31;
+}
+
+.btn-warning{
+    background:#f59e0b;
+    margin-right:5px;
+}
+
+.btn-warning:hover{
+    background:#d97706;
+}
+
+.btn-danger{
+    background:#dc2626;
+}
+
+.btn-danger:hover{
+    background:#b91c1c;
+}
+
+td .btn{
+    padding:8px 12px;
+    font-size:13px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.btn{
+    display:inline-block;
+    background:#2f8f3d;
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.btn-edit{
+    display:inline-block;
+    background:#fbbc05;
+    color:black;
+    text-decoration:none;
+    padding:8px 12px;
+    border-radius:8px;
+    margin-right:5px;
+}
+
+.btn-delete{
+    display:inline-block;
+    background:#ea4335;
+    color:white;
+    text-decoration:none;
+    padding:8px 12px;
+    border-radius:8px;
+}
+
+.page-header{
+    margin-bottom:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.card table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+.card table th,
+.card table td{
+    padding:14px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}

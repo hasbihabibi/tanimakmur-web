@@ -7,90 +7,74 @@ if(isset($_POST['simpan'])){
     $nama = $_POST['nama_komoditas'];
     $deskripsi = $_POST['deskripsi'];
 
-    $sql = "INSERT INTO komoditas
+    $sql = "
+    INSERT INTO komoditas
     (id_komoditas,nama_komoditas,deskripsi)
     VALUES
-    ('$id','$nama','$deskripsi')";
+    ('$id','$nama','$deskripsi')
+    ";
 
     if($conn->query($sql)){
-        header("Location: komoditas.php");
+        header("Location: index.php");
         exit;
-    }else{
-        echo "Gagal Menyimpan Data";
     }
 }
+
+include '../includes/header.php';
+include '../includes/sidebar.php';
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Tambah Komoditas</title>
+<div class="main-content">
 
-<style>
+    <div class="page-header">
+        <h1>Tambah Komoditas</h1>
+    </div>
 
-body{
-    background:#f4f6f9;
-    font-family:Arial,sans-serif;
-}
+    <div class="card">
 
-.card{
-    width:500px;
-    margin:50px auto;
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
+        <form method="POST">
 
-h2{
-    color:#3f6f42;
-    margin-bottom:20px;
-}
+            <div class="form-group">
+                <label>ID Komoditas</label>
+                <input
+                type="text"
+                name="id_komoditas"
+                placeholder="KMD001"
+                required>
+            </div>
 
-input, textarea{
-    width:100%;
-    padding:10px;
-    margin-bottom:15px;
-    border:1px solid #ccc;
-    border-radius:8px;
-}
+            <div class="form-group">
+                <label>Nama Komoditas</label>
+                <input
+                type="text"
+                name="nama_komoditas"
+                required>
+            </div>
 
-button{
-    background:#3f6f42;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:8px;
-    cursor:pointer;
-}
+            <div class="form-group">
+                <label>Deskripsi</label>
+                <textarea
+                name="deskripsi"
+                rows="4"></textarea>
+            </div>
 
-</style>
+            <button
+            type="submit"
+            name="simpan"
+            class="btn">
+            Simpan
+            </button>
 
-</head>
-<body>
+            <a
+            href="index.php"
+            class="btn-delete">
+            Batal
+            </a>
 
-<div class="card">
+        </form>
 
-<h2>Tambah Komoditas</h2>
-
-<form method="POST">
-
-<label>ID Komoditas</label>
-<input type="text" name="id_komoditas" placeholder="KMD-004" required>
-
-<label>Nama Komoditas</label>
-<input type="text" name="nama_komoditas" required>
-
-<label>Deskripsi</label>
-<textarea name="deskripsi"></textarea>
-
-<button type="submit" name="simpan">
-Simpan
-</button>
-
-</form>
+    </div>
 
 </div>
 
-</body>
-</html>
+<?php include '../includes/footer.php'; ?>

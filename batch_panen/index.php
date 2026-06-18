@@ -1,6 +1,5 @@
 <?php
 require_once '../config/database.php';
-
 include '../includes/header.php';
 include '../includes/sidebar.php';
 ?>
@@ -8,7 +7,7 @@ include '../includes/sidebar.php';
 <div class="main-content">
 
     <div class="page-header">
-        <h1>🌾 Batch Panen</h1>
+        <h1>Batch Panen</h1>
         <p>Data hasil panen petani yang telah tercatat</p>
     </div>
 
@@ -46,42 +45,28 @@ include '../includes/sidebar.php';
                 b.harga_per_kg_saat_ini,
                 p.nama_petani,
                 k.nama_komoditas
-
             FROM batch_panen b
-
-            LEFT JOIN petani p
-            ON b.id_petani = p.id_petani
-
-            LEFT JOIN komoditas k
-            ON b.id_komoditas = k.id_komoditas
-
+            LEFT JOIN petani p ON b.id_petani = p.id_petani
+            LEFT JOIN komoditas k ON b.id_komoditas = k.id_komoditas
             ORDER BY b.tanggal_panen DESC
             ";
 
             $result = $conn->query($sql);
 
-            if($result->num_rows > 0):
+            if ($result->num_rows > 0):
 
-                while($row = $result->fetch_assoc()):
+                while ($row = $result->fetch_assoc()):
             ?>
 
                 <tr>
 
-                    <td>
-                        BP-<?= $row['id_batch']; ?>
-                    </td>
+                    <td>BP-<?= $row['id_batch']; ?></td>
 
-                    <td>
-                        <?= $row['tanggal_panen']; ?>
-                    </td>
+                    <td><?= $row['tanggal_panen']; ?></td>
 
-                    <td>
-                        <?= $row['nama_petani']; ?>
-                    </td>
+                    <td><?= $row['nama_petani']; ?></td>
 
-                    <td>
-                        <?= $row['nama_komoditas']; ?>
-                    </td>
+                    <td><?= $row['nama_komoditas']; ?></td>
 
                     <td>
                         <span class="badge">
@@ -90,23 +75,24 @@ include '../includes/sidebar.php';
                     </td>
 
                     <td>
-                        <?= number_format($row['kuantitas_kg'],0,',','.'); ?>
-                        Kg
+                        <?= number_format($row['kuantitas_kg'],0,',','.'); ?> Kg
                     </td>
 
                     <td>
-                        Rp
-                        <?= number_format($row['harga_per_kg_saat_ini'],0,',','.'); ?>
+                        Rp <?= number_format($row['harga_per_kg_saat_ini'],0,',','.'); ?>
                     </td>
 
                     <td>
 
-                        <a
-                        href="actions/delete_panen.php?id=<?= $row['id_batch']; ?>"
-                        class="btn-delete"
-                        onclick="return confirm('Hapus data ini?')">
-                            Hapus
+                        <a href="update_harga.php?id=<?= $row['id_batch']; ?>" class="btn">
+                            Update
                         </a>
+
+
+                        <form method="POST" action="delete_panen.php" style="display:inline;" onsubmit="return confirm('Hapus data ini?')">
+                            <input type="hidden" name="id" value="<?= $row['id_batch']; ?>">
+                            <button type="submit" class="btn-delete">Hapus</button>
+                        </form>
 
                     </td>
 
@@ -114,7 +100,6 @@ include '../includes/sidebar.php';
 
             <?php
                 endwhile;
-
             else:
             ?>
 

@@ -33,7 +33,7 @@ include '../includes/sidebar.php';
 <div class="main-content">
 
     <div class="page-header">
-        <h1>📊 Laporan Sistem Logistik</h1>
+        <h1>Laporan Sistem Logistik</h1>
         <p>Ringkasan data distribusi dan panen</p>
     </div>
 

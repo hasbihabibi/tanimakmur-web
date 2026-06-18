@@ -3,10 +3,11 @@ require_once '../config/database.php';
 
 $id = $_GET['id'];
 
-mysqli_query($conn,
+mysqli_query(
+$conn,
 "DELETE FROM komoditas
-WHERE id_komoditas='$id'");
+WHERE id_komoditas='$id'"
+);
 
-header("Location: komoditas.php");
+header("Location:index.php");
 exit;
-?>

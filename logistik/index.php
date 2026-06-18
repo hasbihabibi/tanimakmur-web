@@ -32,7 +32,7 @@ include '../includes/sidebar.php';
 <main class="main-content">
 
 <div class="page-header">
-    <h1>🚚 Data Logistik</h1>
+    <h1>Data Logistik</h1>
 </div>
 
 <div class="stats">

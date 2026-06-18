@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Tani Makmur</title>
     <style>
-        /* CSS - FLOATING CARD LAYOUT */
         * { 
             box-sizing: border-box; 
             font-family: Arial, Helvetica, sans-serif; 
@@ -30,7 +29,6 @@
             padding: 0 40px; 
         }
 
-        /* Panel Kiri*/
         .left-panel {
             background-color: #386641;
             color: white;
@@ -70,7 +68,6 @@
             font-size: 1.05rem; 
         }
 
-        /* Panel Kanan*/
         .right-panel { 
             flex: 1; 
             display: flex; 
@@ -145,7 +142,7 @@
 
     <div class="main-wrapper">
         <div class="left-panel">
-            <div class="header-title">🌱 Tani Makmur</div>
+            <div class="header-title">Tani Makmur</div>
             <img src="../assets/img/jagung.png" alt="Jagung" class="hero-img">
             <div class="welcome-text">
                 <h1>Selamat datang di<br>Tani Makmur!</h1>

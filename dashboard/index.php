@@ -210,15 +210,13 @@ while($row = $resultStatus->fetch_assoc()){
     <main class="main-content">
 
         <header class="topbar">
-            <input type="text" placeholder="Cari data...">
-
-            <div class="profile">
-                <div class="notif"></div>
+            <div></div>
+            <a href="../profile/index.php" class="profile-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="background-color: #f1f5f9; border-radius: 50%; padding: 6px; color: #64748b; cursor: pointer;">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
             </svg>
-            </div>
+            </a>
         </header>
 
         <section class="hero">
@@ -231,14 +229,20 @@ while($row = $resultStatus->fetch_assoc()){
                 </h1>
 
                 <p>
-                    Pengelolaan distribusi komoditas cabai dari lahan hingga pasar secara efisien,
+                    Pengelolaan distribusi komoditas pertanian dari lahan hingga pasar secara efisien,
                     transparan, dan berbasis data real-time.
                 </p>
 
                 <div class="hero-buttons">
-                    <button>Catat Batch Panen</button>
-                    <button class="secondary">Kelola Distribusi</button>
-                    <button class="secondary">Laporan</button>
+                    <a href="../batch_panen/tambah_batch.php" class="hero-btn">
+                    Catat Batch Panen
+                    </a>
+                    <a href="../logistik/index.php" class="hero-btn secondary">
+                        Kelola Distribusi
+                    </a>
+                    <a href="../laporan/index.php" class="hero-btn secondary">
+                        Laporan
+                    </a>
                 </div>
             </div>
 
@@ -322,7 +326,9 @@ while($row = $resultStatus->fetch_assoc()){
             <div class="table-box">
                 <div class="box-header">
                     <h3>Batch Panen Terbaru</h3>
-                    <button>Lihat Semua</button>
+                    <a href="../batch_panen/index.php" class="btn-primary">
+                        Lihat Semua
+                    </a>
                 </div>
 
                 <table>

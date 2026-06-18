@@ -3,8 +3,10 @@ require_once '../config/database.php';
 
 $id = $_GET['id'];
 
-$data = mysqli_query($conn,
-"SELECT * FROM petani WHERE id_petani='$id'");
+$data = mysqli_query(
+    $conn,
+    "SELECT * FROM petani WHERE id_petani='$id'"
+);
 
 $row = mysqli_fetch_assoc($data);
 
@@ -24,90 +26,93 @@ if(isset($_POST['update'])){
     WHERE id_petani='$id'
     ");
 
-    header("Location: petani.php");
+    header("Location: index.php");
     exit;
 }
+
+include '../includes/header.php';
+include '../includes/sidebar.php';
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Edit Petani</title>
+<div class="main-content">
 
-<style>
+    <div class="page-header">
+        <h1>Edit Petani</h1>
+        <p>Perbarui data petani</p>
+    </div>
 
-body{
-    background:#f4f6f9;
-    font-family:Arial,sans-serif;
-}
+    <div class="card">
 
-.card{
-    width:500px;
-    margin:50px auto;
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
+        <form method="POST">
 
-h2{
-    color:#3f6f42;
-    margin-bottom:20px;
-}
+            <div class="form-group">
 
-input, textarea{
-    width:100%;
-    padding:10px;
-    margin-bottom:15px;
-    border:1px solid #ccc;
-    border-radius:8px;
-}
+                <label>Nama Petani</label>
 
-button{
-    background:#3f6f42;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:8px;
-    cursor:pointer;
-}
+                <input
+                    type="text"
+                    name="nama_petani"
+                    value="<?= $row['nama_petani']; ?>"
+                    required>
 
-</style>
+            </div>
 
-</head>
-<body>
+            <div class="form-group">
 
-<div class="card">
+                <label>Password</label>
 
-<h2>Edit Data Petani</h2>
+                <input
+                    type="text"
+                    name="password"
+                    value="<?= $row['password']; ?>"
+                    required>
 
-<form method="POST">
+            </div>
 
-<label>Nama Petani</label>
-<input type="text"
-name="nama_petani"
-value="<?php echo $row['nama_petani']; ?>">
+            <div class="form-group">
 
-<label>Password</label>
-<input type="text"
-name="password"
-value="<?php echo $row['password']; ?>">
+                <label>No Telepon</label>
 
-<label>No Telepon</label>
-<input type="text"
-name="no_telepon"
-value="<?php echo $row['no_telepon']; ?>">
+                <input
+                    type="text"
+                    name="no_telepon"
+                    value="<?= $row['no_telepon']; ?>"
+                    required>
 
-<label>Alamat</label>
-<textarea name="alamat"><?php echo $row['alamat']; ?></textarea>
+            </div>
 
-<button type="submit" name="update">
-Update
-</button>
+            <div class="form-group">
 
-</form>
+                <label>Alamat</label>
+
+                <textarea
+                    name="alamat"
+                    rows="4"
+                    required><?= $row['alamat']; ?></textarea>
+
+            </div>
+
+            <div class="form-actions">
+
+                <a
+                    href="index.php"
+                    class="btn btn-secondary">
+                    Batal
+                </a>
+
+                <button
+                    type="submit"
+                    name="update"
+                    class="btn btn-success">
+                    Update Data
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
 
-</body>
-</html>
+<?php include '../includes/footer.php'; ?>

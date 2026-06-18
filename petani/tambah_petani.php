@@ -15,7 +15,7 @@ if(isset($_POST['simpan'])){
     ('$id','$nama','$password','$telepon','$alamat')";
 
     if($conn->query($sql)){
-        header("Location: petani.php");
+        header("Location: index.php");
         exit;
     }else{
         echo "Gagal Menyimpan Data";
@@ -98,7 +98,7 @@ button:hover{
 <form method="POST">
 
 <label>ID Petani</label>
-<input type="text" name="id_petani" placeholder="PTN-003" required>
+<input type="text" name="id_petani" required>
 
 <label>Nama Petani</label>
 <input type="text" name="nama_petani" required>

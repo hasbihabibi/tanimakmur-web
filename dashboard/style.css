@@ -400,3 +400,37 @@ canvas{
         grid-template-columns:1fr;
     }
 }
+
+.search-form{
+    display:flex;
+    gap:10px;
+}
+
+.search-form button{
+    background:#2f8f3d;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.hero-btn{
+    display:inline-block;
+    padding:14px 22px;
+    border-radius:14px;
+    background:white;
+    color:#2f8f3d;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.hero-btn:hover{
+    transform:translateY(-2px);
+}
+
+.hero-btn.secondary{
+    background:rgba(255,255,255,.15);
+    color:white;
+}

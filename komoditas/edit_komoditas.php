@@ -3,8 +3,11 @@ require_once '../config/database.php';
 
 $id = $_GET['id'];
 
-$data = mysqli_query($conn,
-"SELECT * FROM komoditas WHERE id_komoditas='$id'");
+$data = mysqli_query(
+$conn,
+"SELECT * FROM komoditas
+WHERE id_komoditas='$id'"
+);
 
 $row = mysqli_fetch_assoc($data);
 
@@ -20,73 +23,68 @@ if(isset($_POST['update'])){
     WHERE id_komoditas='$id'
     ");
 
-    header("Location: komoditas.php");
+    header("Location:index.php");
     exit;
 }
+
+include '../includes/header.php';
+include '../includes/sidebar.php';
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Edit Komoditas</title>
+<div class="main-content">
 
-<style>
+    <div class="page-header">
+        <h1>Edit Komoditas</h1>
+    </div>
 
-body{
-    background:#f4f6f9;
-    font-family:Arial,sans-serif;
-}
+    <div class="card">
 
-.card{
-    width:500px;
-    margin:50px auto;
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
+        <form method="POST">
 
-input, textarea{
-    width:100%;
-    padding:10px;
-    margin-bottom:15px;
-    border:1px solid #ccc;
-    border-radius:8px;
-}
+            <div class="form-group">
+                <label>ID Komoditas</label>
 
-button{
-    background:#3f6f42;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:8px;
-}
+                <input
+                type="text"
+                value="<?= $row['id_komoditas']; ?>"
+                readonly>
+            </div>
 
-</style>
-</head>
-<body>
+            <div class="form-group">
+                <label>Nama Komoditas</label>
 
-<div class="card">
+                <input
+                type="text"
+                name="nama_komoditas"
+                value="<?= $row['nama_komoditas']; ?>"
+                required>
+            </div>
 
-<h2>Edit Komoditas</h2>
+            <div class="form-group">
+                <label>Deskripsi</label>
 
-<form method="POST">
+                <textarea
+                name="deskripsi"
+                rows="4"><?= $row['deskripsi']; ?></textarea>
+            </div>
 
-<label>Nama Komoditas</label>
-<input type="text"
-name="nama_komoditas"
-value="<?php echo $row['nama_komoditas']; ?>">
+            <button
+            type="submit"
+            name="update"
+            class="btn">
+            Update
+            </button>
 
-<label>Deskripsi</label>
-<textarea name="deskripsi"><?php echo $row['deskripsi']; ?></textarea>
+            <a
+            href="index.php"
+            class="btn-delete">
+            Batal
+            </a>
 
-<button type="submit" name="update">
-Update
-</button>
+        </form>
 
-</form>
+    </div>
 
 </div>
 
-</body>
-</html>
+<?php include '../includes/footer.php'; ?>
