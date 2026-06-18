@@ -124,9 +124,6 @@ body{
     border-radius:24px;
     padding:40px;
     color:white;
-    display:flex;
-    justify-content:space-between;
-    gap:40px;
     margin-bottom:25px;
 }
 
@@ -173,29 +170,6 @@ body{
 .hero-buttons .secondary{
     background:rgba(255,255,255,.15);
     color:white;
-}
-
-.hero-right{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    width:350px;
-}
-
-.mini-card{
-    background:rgba(255,255,255,.12);
-    padding:20px;
-    border-radius:18px;
-}
-
-.mini-card h4{
-    margin-bottom:10px;
-    font-size:14px;
-}
-
-.mini-card p{
-    font-size:22px;
-    font-weight:bold;
 }
 
 /* =====================

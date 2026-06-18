@@ -245,30 +245,6 @@ while($row = $resultStatus->fetch_assoc()){
                     </a>
                 </div>
             </div>
-
-            <div class="hero-right">
-
-    <div class="mini-card">
-        <h4>Total Panen</h4>
-        <p><?= number_format($totalPanen,0,',','.'); ?> Kg</p>
-    </div>
-
-    <div class="mini-card">
-        <h4>Total Batch</h4>
-        <p><?= $totalBatch; ?></p>
-    </div>
-
-    <div class="mini-card">
-        <h4>Total Komoditas</h4>
-        <p><?= $totalKomoditas; ?></p>
-    </div>
-
-    <div class="mini-card">
-        <h4>Total Petani</h4>
-        <p><?= $totalPetani; ?></p>
-    </div>
-
-</div>
         </section>
 
         <section class="stats-grid">
