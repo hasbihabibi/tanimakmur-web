@@ -19,16 +19,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
 
         $stmt = $conn->prepare("
-            INSERT INTO batch_panen
+            INSERT INTO batch_panen 
             (
-                tanggal_panen,
-                kuantitas_kg,
-                grade_panen,
-                harga_per_kg_saat_ini,
-                id_petani,
+                tanggal_panen, 
+                kuantitas_kg, 
+                grade_panen, 
+                harga_per_kg_saat_ini, 
+                id_petani, 
                 id_komoditas
-            )
-            VALUES (?,?,?,?,?,?)
+            ) 
+            VALUES (?, ?, ?, ?, ?, ?)
         ");
 
         $stmt->bind_param(
@@ -41,12 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $komoditas
         );
 
-        echo "<pre>";
-        echo "Petani: $petani\n";
-        echo "Komoditas: $komoditas\n";
-        print_r($_POST);
-        echo "</pre>";
-        exit;
+        // Jika berhasil disimpan, langsung dialihkan ke halaman utama batch panen
         if ($stmt->execute()) {
             header("Location: index.php");
             exit;
